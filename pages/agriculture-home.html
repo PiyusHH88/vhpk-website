@@ -1,65 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VHPK Agriculture Home</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/agriculture.css">
-</head>
-<body class="agriculture">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VHPK Agriculture — Extraordinary</title>
+<style>
+/* ---------- Variables & Reset ---------- */
+:root{
+  --bg:#fbfdf6;
+  --earth:#6b4c3b;
+  --leaf-dark:#2e7d32;
+  --leaf:#6fbf73;
+  --accent:#f1c27d;
+  --muted:#6b6b6b;
+  --glass:rgba(255,255,255,0.8);
+  --radius:16px;
+  --container:1200px;
+  --transition:.3s;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;font-family:'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#213;}
+img{display:block;max-width:100%;border-radius:12px;transition:transform var(--transition);}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;font-family:'Segoe UI',Roboto,sans-serif;}
 
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="brand">VHPK Agriculture</div>
-    <nav class="nav">
-      <a href="agriculture-home.html">Home</a>
-      <a href="agriculture-products.html">Products</a>
-      <a href="agriculture-gallery.html">Gallery</a>
-      <a href="agriculture-about.html">About Us</a>
-      <a href="agriculture-contact.html">Contact</a>
+/* ---------- Container ---------- */
+.container{width:94%;max-width:var(--container);margin:0 auto;}
+
+/* ---------- Header ---------- */
+header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(255,255,255,0.9);backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,0.06);}
+.header-inner{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1.3rem;color:var(--leaf-dark);}
+.brand .logo{width:48px;height:48px;background:linear-gradient(135deg,var(--leaf),var(--leaf-dark));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;border-radius:12px;box-shadow:0 6px 18px rgba(46,125,50,0.2);}
+nav{display:flex;align-items:center;gap:20px;}
+nav a{padding:8px 14px;border-radius:12px;color:var(--muted);font-weight:600;transition:all var(--transition);}
+nav a:hover, nav a.active{background:rgba(46,125,50,0.08);color:var(--leaf-dark);}
+.menu-btn{display:none;font-size:1.8rem;background:none;border:none;}
+@media(max-width:880px){
+  nav{display:none;position:absolute;top:70px;left:10px;right:10px;background:var(--glass);flex-direction:column;padding:12px;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,0.1);}
+  nav.show{display:flex;}
+  .menu-btn{display:block;}
+}
+
+/* ---------- Hero ---------- */
+.hero{margin-top:80px;min-height:80vh;display:flex;align-items:center;justify-content:center;position:relative;background:url('/images/Banner.jpg') center/cover no-repeat;border-bottom-left-radius:50px;border-bottom-right-radius:50px;}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(255,255,255,0.02));}
+.hero-inner{position:relative;display:flex;align-items:center;gap:50px;width:100%;max-width:1200px;padding:0 20px;}
+.hero-left{flex:1;color:#fff;z-index:2;}
+.hero-left h1{font-size:3rem;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 8px rgba(0,0,0,0.3);}
+.hero-left p{font-size:1.2rem;margin-bottom:20px;text-shadow:0 1px 4px rgba(0,0,0,0.3);}
+.cta-row{display:flex;gap:14px;}
+.btn-primary{padding:14px 22px;background:linear-gradient(135deg,var(--leaf-dark),var(--leaf));color:#fff;border:none;border-radius:16px;font-weight:700;transition:transform var(--transition);box-shadow:0 10px 28px rgba(46,125,50,0.2);}
+.btn-primary:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(46,125,50,0.25);}
+.btn-ghost{padding:12px 18px;background:transparent;border:1px solid #fff;border-radius:16px;color:#fff;font-weight:700;}
+
+/* Hero right features */
+.hero-right{flex:0 0 380px;display:flex;flex-direction:column;gap:16px;}
+.feature-tile{display:flex;gap:12px;background:var(--glass);padding:16px;border-radius:16px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,0.06);}
+.feature-tile img{width:64px;height:64px;object-fit:cover;}
+.feature-tile h4{font-weight:700;color:var(--earth);}
+.feature-tile p{color:var(--muted);font-size:0.95rem;}
+
+/* ---------- Products ---------- */
+.products{padding:60px 0;}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding:0 10px;}
+.section-header h2{color:var(--leaf-dark);font-size:1.8rem;}
+.explore-btn{background:var(--leaf-dark);color:#fff;padding:10px 20px;border-radius:16px;font-weight:700;transition:all var(--transition);}
+.explore-btn:hover{background:var(--leaf);}
+
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;padding:0 10px;}
+.prod-card{background:var(--glass);border-radius:16px;padding:16px;box-shadow:0 14px 36px rgba(0,0,0,0.08);display:flex;flex-direction:column;gap:12px;transition:transform var(--transition);}
+.prod-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.12);}
+.prod-card img{border-radius:16px;height:160px;object-fit:cover;}
+.prod-card h3{color:var(--earth);font-size:1.1rem;}
+.prod-card p{color:var(--muted);flex:1;}
+.prod-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+.price{font-weight:800;color:var(--leaf-dark);}
+
+/* ---------- Gallery ---------- */
+.gallery{padding:60px 0;background:transparent;}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;padding:0 10px;}
+
+/* ---------- Contact ---------- */
+.contact-cta{margin:60px 0;padding:48px;border-radius:20px;background:var(--glass);display:flex;flex-wrap:wrap;gap:28px;box-shadow:0 20px 60px rgba(0,0,0,0.08);}
+.contact-left{flex:1;min-width:280px;}
+.contact-left h3{color:var(--leaf-dark);font-size:1.5rem;margin-bottom:10px;}
+.contact-left p{color:var(--muted);}
+.contact-right{flex:0 0 380px;min-width:280px;}
+.contact-right form{display:flex;flex-direction:column;gap:12px;}
+.contact-right input, .contact-right textarea{padding:14px;border-radius:16px;border:1px solid rgba(0,0,0,0.1);font-size:1rem;}
+.contact-right button{padding:14px 22px;border:none;border-radius:16px;background:var(--leaf-dark);color:#fff;font-weight:700;transition:all var(--transition);}
+.contact-right button:hover{background:var(--leaf);}
+
+/* ---------- Footer ---------- */
+footer{padding:28px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(0,0,0,0.05);}
+footer p{font-size:0.95rem;}
+
+/* ---------- Responsive ---------- */
+@media(max-width:880px){
+.hero-inner{flex-direction:column;align-items:flex-start;padding:20px;}
+.hero-right{width:100%;}
+.cards-grid{grid-template-columns:1fr;}
+.section-header{flex-direction:column;gap:12px;align-items:flex-start;}
+.contact-cta{flex-direction:column;}
+.contact-right{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner container">
+    <div class="brand"><div class="logo">V</div>VHPK Agriculture</div>
+    <button class="menu-btn" id="menuBtn">☰</button>
+    <nav id="siteNav">
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">Gallery</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
     </nav>
   </div>
 </header>
 
-<main>
-  <!-- Hero Section -->
-  <section class="agri-hero reveal-on-scroll">
-    <div class="container">
-      <h1>Fresh Mosambi & Citrus Varieties</h1>
-      <p>Delivering high-quality citrus fruits straight from the farm.</p>
-    </div>
-  </section>
-
-  <!-- Featured Products Preview -->
-  <section class="products container reveal-on-scroll">
-    <h2>Our Top Citrus</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <img src="../images/agriculture/mosambi.jpg" alt="Mosambi">
-        <h3>Mosambi</h3>
-        <p>Juicy, fresh, and naturally sweet.</p>
-      </div>
-      <div class="product-card">
-        <img src="../images/agriculture/lemon.jpg" alt="Lemon">
-        <h3>Lemon</h3>
-        <p>Rich in vitamin C and refreshing taste.</p>
-      </div>
-      <div class="product-card">
-        <img src="../images/agriculture/orange.jpg" alt="Orange">
-        <h3>Orange</h3>
-        <p>Freshly harvested, high-quality oranges.</p>
+<section class="hero">
+  <div class="hero-inner container">
+    <div class="hero-left">
+      <h1>Fresh Citrus & Orchard Harvests — Straight From The Farm</h1>
+      <p>Organically grown Mosambi & Sweet lemons delivered straight to your home.</p>
+      <div class="cta-row">
+        <a href="#" class="btn-primary">Shop Fresh</a>
+        <a href="#" class="btn-ghost">Learn More</a>
       </div>
     </div>
-    <a href="agriculture-products.html" class="btn">View All Products</a>
-  </section>
-</main>
+    <div class="hero-right">
+      <div class="feature-tile"><img src="https://images.unsplash.com/photo-1592928305727-1d84b6bb0c2b?auto=format&fit=crop&w=200&q=80" alt="Premium Quality"><div><h4>Premium Quality</h4><p>Hand-picked & quality-checked</p></div></div>
+      <div class="feature-tile"><img src="https://images.unsplash.com/photo-1506807803488-8eafc1533b98?auto=format&fit=crop&w=200&q=80" alt="Sustainable Farming"><div><h4>Sustainably Grown</h4><p>Eco-friendly methods</p></div></div>
+      <div class="feature-tile"><img src="https://images.unsplash.com/photo-1576765607924-427fa0b89f12?auto=format&fit=crop&w=200&q=80" alt="Farm to Table"><div><h4>Farm to Table</h4><p>Freshness in every bite</p></div></div>
+    </div>
+  </div>
+</section>
 
-<footer class="site-footer">
-  <div class="container footer-inner">© <span id="year-agri"></span> VHPK Agriculture</div>
+<section class="products container">
+  <div class="section-header">
+    <h2>Our Citrus Products</h2>
+    <a href="#" class="explore-btn">Explore More</a>
+  </div>
+  <div class="cards-grid">
+    <div class="prod-card">
+      <img src="/images/mosambi.webp" alt="Mosambi">
+      <h3>Mosambi</h3>
+      <p>Sweet, juicy Mosambi — perfect for fresh juices and healthy snacks.</p>
+      <div class="prod-row"><span class="price">₹60 / kg</span><button class="btn-primary">Buy</button></div>
+    </div>
+    <div class="prod-card">
+      <img src="/images/jafa.webp" alt="Jafa">
+      <h3>Jafa</h3>
+      <p>Jafa Mosambi is aromatic, mildly sweet, thin-skinned, organically grown, vitamin-C rich, low-acid, perfect for juice.</p>
+      <div class="prod-row"><span class="price">₹80 / kg</span><button class="btn-primary">Buy</button></div>
+    </div>
+    <div class="prod-card">
+      <img src="/images/satgudi.webp" alt="Satgudi">
+      <h3>Satgudi</h3>
+      <p>Satgudi produces round pale-yellow fruits, organically grown, low-acid, high-sugar, juicy, refreshing, perfect for fresh consumption.</p>
+      <div class="prod-row"><span class="price">₹70 / kg</span><button class="btn-primary">Buy</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery container">
+  <div class="section-header">
+    <h2>Harvesting Moments</h2>
+    <a href="#" class="explore-btn">Explore More</a>
+  </div>
+  <div class="gallery-grid">
+    <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=400&q=80" alt="Orchard">
+    <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=400&q=80" alt="Harvest">
+    <img src="https://images.unsplash.com/photo-1542838681-1e12f798c857?auto=format&fit=crop&w=400&q=80" alt="Farmers">
+    <img src="https://images.unsplash.com/photo-1584270354949-3d42c96d0cd3?auto=format&fit=crop&w=400&q=80" alt="Closeup">
+  </div>
+</section>
+
+<footer>
+  <p>© <span id="yr"></span> VHPK Agriculture — Organic • Fresh • Trusted</p>
 </footer>
 
-<script src="../js/main.js"></script>
-<script src="../js/agriculture.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const menuBtn=document.getElementById('menuBtn'), siteNav=document.getElementById('siteNav');
+menuBtn.addEventListener('click',()=>siteNav.classList.toggle('show'));
+</script>
+
 </body>
 </html>

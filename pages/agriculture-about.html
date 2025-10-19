@@ -1,42 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About VHPK Agriculture</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/agriculture.css">
-</head>
-<body class="agriculture">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VHPK Agriculture — About Us</title>
+<style>
+/* ---------- Variables & Reset ---------- */
+:root{
+  --bg:#fbfdf6;
+  --earth:#6b4c3b;
+  --leaf-dark:#2e7d32;
+  --leaf:#6fbf73;
+  --accent:#f1c27d;
+  --muted:#6b6b6b;
+  --glass:rgba(255,255,255,0.25);
+  --glass-hover:rgba(255,255,255,0.35);
+  --radius:16px;
+  --container:1200px;
+  --transition:.3s;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;font-family:'Segoe UI',Roboto,sans-serif;background:var(--bg);color:#213;scroll-behavior:smooth;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;font-family:'Segoe UI',Roboto,sans-serif;}
+img{display:block;max-width:100%;border-radius:12px;transition:transform var(--transition);}
 
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="brand">VHPK Agriculture</div>
-    <nav class="nav">
-      <a href="agriculture-home.html">Home</a>
-      <a href="agriculture-products.html">Products</a>
-      <a href="agriculture-gallery.html">Gallery</a>
-      <a href="agriculture-about.html">About Us</a>
-      <a href="agriculture-contact.html">Contact</a>
+/* ---------- Container ---------- */
+.container{width:94%;max-width:var(--container);margin:0 auto;}
+
+/* ---------- Header ---------- */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.25);
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  transition:background var(--transition);
+}
+header.scrolled{background:rgba(255,255,255,0.35);}
+.header-inner{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1.3rem;color:var(--leaf-dark);}
+.brand .logo{width:48px;height:48px;background:linear-gradient(135deg,var(--leaf),var(--leaf-dark));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;border-radius:12px;box-shadow:0 6px 18px rgba(46,125,50,0.2);}
+nav{display:flex;align-items:center;gap:20px;transition:all var(--transition);}
+nav a{padding:10px 16px;border-radius:12px;font-weight:600;transition:all var(--transition);color:var(--muted);}
+nav a:hover, nav a.active{background:var(--glass-hover);color:var(--leaf-dark);}
+.menu-btn{display:none;font-size:1.8rem;background:none;border:none;}
+@media(max-width:880px){
+  nav{display:none;position:absolute;top:70px;left:10px;right:10px;background:var(--glass);flex-direction:column;padding:12px;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,0.1);}
+  nav.show{display:flex;}
+  .menu-btn{display:block;}
+}
+
+/* ---------- Hero ---------- */
+.hero{margin-top:80px;min-height:40vh;display:flex;align-items:center;justify-content:center;position:relative;background:url('/images/Banner.jpg') center/cover no-repeat;border-bottom-left-radius:50px;border-bottom-right-radius:50px;}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(255,255,255,0.02));}
+.hero-inner{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:1200px;padding:0 10px;color:#fff;text-align:center;}
+.hero-inner h1{font-size:3rem;text-shadow:0 2px 8px rgba(0,0,0,0.3);}
+
+/* ---------- About Section ---------- */
+.about{padding:60px 0;background:var(--bg);}
+.about-inner{display:flex;flex-wrap:wrap;gap:40px;align-items:center;justify-content:center;max-width:1200px;margin:0 auto;}
+.about-text{flex:1;min-width:320px;}
+.about-text h2{color:var(--leaf-dark);font-size:2rem;margin-bottom:16px;}
+.about-text p{color:var(--muted);line-height:1.8;margin-bottom:14px;font-size:1rem;}
+.about-image{flex:1;min-width:320px;display:flex;justify-content:center;align-items:center;}
+.about-image img{border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.08);transition:transform var(--transition);}
+.about-image img:hover{transform:scale(1.03);}
+
+/* ---------- Footer ---------- */
+footer{padding:28px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(0,0,0,0.05);}
+footer p{font-size:0.95rem;}
+
+/* ---------- Responsive ---------- */
+@media(max-width:880px){
+.hero-inner h1{font-size:2rem;}
+.about-inner{flex-direction:column;}
+.about-image img{width:90%;}
+}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="header-inner container">
+    <div class="brand"><div class="logo">V</div>VHPK Agriculture</div>
+    <button class="menu-btn" id="menuBtn">☰</button>
+    <nav id="siteNav">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
 
-<main>
-  <section class="about container reveal-on-scroll">
-    <h2>About VHPK Agriculture</h2>
-    <p>
-      VHPK Agriculture specializes in cultivating premium citrus fruits including Mosambi, Lemon, Orange, and Grapefruit. 
-      Our farms use sustainable practices to deliver the freshest fruits directly to our customers. Quality, freshness, and customer satisfaction are our priorities.
-    </p>
-  </section>
-</main>
+<section class="hero">
+  <div class="hero-inner container">
+    <h1>About Us</h1>
+  </div>
+</section>
 
-<footer class="site-footer">
-  <div class="container footer-inner">© <span id="year-agri"></span> VHPK Agriculture</div>
+<section class="about">
+  <div class="about-inner container">
+    <div class="about-text">
+      <h2>VHPK Energy Pvt. Ltd.</h2>
+      <p>VHPK Energy Pvt. Ltd. is a multifaceted business with an emphasis on innovation and sustainability. The company, which is based in Himachal Pradesh and Delhi, is mostly involved in organic farming, with a focus on growing Sweet Lemon, curry leaves and encouraging environmentally friendly gardening techniques.</p>
+      <p>Planted in 100 acres area, regarding the organic varieties of Sweet Lemon (including Jafa, Satgudi, Blood Red, Malta, Balancia, and Mosambi), these citrus fruits are cultivated organically in Himachal Pradesh’s favorable mid and high-hill climatic zones. Each variety offers distinctive attributes: Jafa is aromatic and mild; Satgudi is juicy and sweet with low acidity; Blood Red is rich in antioxidants with tangy flavor; Malta presents a semi-sweet aroma-rich profile; Balancia is hardy with disease resistance; Mosambi is prized for its mild sweetness and detoxifying properties. Organic farming practices in the region emphasize chemical-free cultivation using compost, fermented organic manures, and natural pest control such as neem extracts, thus preserving fruit quality and health benefits.</p>
+      <p>In addition to its agricultural endeavors, VHPK Energy provides goods and services in the railway sector, which aid in the development of India's infrastructure. Our goal is to develop India's green and engineering future while combining industrial advancement with natural prosperity to create value for communities.</p>
+    </div>
+    <div class="about-image">
+  <video autoplay muted loop playsinline style="border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.08);width:100%;max-width:600px;">
+    <source src="/videos/about video.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+</div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© <span id="yr"></span> VHPK Agriculture — Sustainable • Fresh • Trusted</p>
 </footer>
 
-<script src="../js/main.js"></script>
-<script src="../js/agriculture.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const menuBtn=document.getElementById('menuBtn'), siteNav=document.getElementById('siteNav');
+menuBtn.addEventListener('click',()=>siteNav.classList.toggle('show'));
+window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled', window.scrollY>20);});
+</script>
+
 </body>
 </html>
