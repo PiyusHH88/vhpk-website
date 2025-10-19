@@ -1,0 +1,6 @@
+body.railway {background:#f0f0f0; color:#333;}
+.rail-hero {background:#1e3d59; color:#fff; text-align:center; padding:5rem 1rem;}
+.products .product-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; margin-top:2rem;}
+.product-card {background:#fff; padding:1rem; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); transition:0.3s;}
+.product-card:hover {transform:translateY(-5px); box-shadow:0 5px 15px rgba(0,0,0,0.2);}
+.about .industrial-bg {background:url('https://via.placeholder.com/1200x400?text=Industrial+Background') center/cover no-repeat; height:200px; border-radius:10px; margin-top:1rem;}
