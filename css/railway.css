@@ -1,0 +1,20 @@
+body.railway {
+  background-color: #f4f6f8;
+  color: #1e3d59;
+}
+
+body.railway .brand {
+  color: #1e3d59;
+}
+
+body.railway a.btn {
+  background-color: #1e3d59;
+}
+
+body.railway a.btn:hover {
+  background-color: #3a3a3a;
+}
+
+body.railway h1, body.railway h2 {
+  color: #1e3d59;
+}

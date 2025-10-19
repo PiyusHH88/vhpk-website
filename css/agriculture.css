@@ -1,0 +1,26 @@
+body.agriculture {
+  background-color: #f9fff0;
+  color: #333;
+}
+
+body.agriculture .brand {
+  color: #6b8e23;
+}
+
+body.agriculture a.btn {
+  background-color: #9acd32;
+  color: #333;
+}
+
+body.agriculture a.btn:hover {
+  background-color: #8bb12c;
+}
+
+body.agriculture h1, body.agriculture h2 {
+  color: #6b8e23;
+}
+
+body.agriculture .product-card {
+  background-color: #ffffff;
+  border: 1px solid #d0e8a6;
+}

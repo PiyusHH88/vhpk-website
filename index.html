@@ -1,56 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VHPK — Choose a Section</title>
-  <!-- Shared CSS -->
-<link rel="stylesheet" href="css/style.css">
-
-<!-- Section-specific CSS -->
-<!-- For Railway page -->
-<link rel="stylesheet" href="css/railway.css">
-<!-- For Agriculture page -->
-<link rel="stylesheet" href="css/agriculture.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VHPK Landing Page</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="landing">
+<body>
   <header class="site-header">
-    <div class="container header-inner">
+    <div class="container">
       <div class="brand">VHPK</div>
       <nav class="nav">
-        <a href="#" class="nav-link">About</a>
-        <a href="#" class="nav-link">Contact</a>
+        <a href="#description">About Us</a>
+        <a href="#sections">Sections</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main class="hero">
-    <div class="container hero-inner">
-      <h1 class="hero-title">Welcome to VHPK</h1>
-      <p class="hero-sub">Select a division to continue</p>
+  <main>
+    <!-- Description Section -->
+    <section id="description" class="container reveal-on-scroll">
+      <h1>Welcome to VHPK</h1>
+      <p>VHPK is a diversified company specializing in railway components and high-quality citrus fruits. We focus on excellence, innovation, and customer satisfaction in all our operations.</p>
+    </section>
 
-      <div class="cards">
-        <a href="railway.html" class="card card-railway" aria-label="VHPK Railway">
-          <div class="card-content">
-            <h2>VHPK Railway</h2>
-            <p>Engineering excellence in railway components.</p>
-            <span class="cta">Explore Railway →</span>
-          </div>
-        </a>
+    <!-- Section Cards -->
+    <section id="sections" class="cards container">
+      <a href="pages/railway-home.html" class="card card-railway">
+        <div class="card-content">
+          <h2>VHPK Railway</h2>
+          <p>Engineering excellence in railway components.</p>
+          <span class="cta">Explore Railway →</span>
+        </div>
+      </a>
 
-        <a href="agriculture.html" class="card card-agri" aria-label="VHPK Agriculture">
-          <div class="card-content">
-            <h2>VHPK Agriculture</h2>
-            <p>Fresh Mosambi &amp; citrus varieties.</p>
-            <span class="cta">Explore Agriculture →</span>
-          </div>
-        </a>
-      </div>
-    </div>
+      <a href="pages/agriculture-home.html" class="card card-agri">
+        <div class="card-content">
+          <h2>VHPK Agriculture</h2>
+          <p>Fresh Mosambi & citrus varieties.</p>
+          <span class="cta">Explore Agriculture →</span>
+        </div>
+      </a>
+    </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner">© <span id="year"></span> VHPK — All rights reserved</div>
+    <div class="container">
+      © <span id="year-landing"></span> VHPK
+    </div>
   </footer>
 
   <script src="js/main.js"></script>
