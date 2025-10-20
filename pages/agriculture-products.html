@@ -1,64 +1,626 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VHPK Agriculture Products</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/agriculture.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>VHPK Agriculture — Products</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1: #f6fbf7;
+    --leaf-1: #1e6b2e;
+    --leaf-2: #67c77a;
+    --accent: #f6c97d;
+    --muted: #58615f;
+    --glass: rgba(255,255,255,0.58);
+    --glass-strong: rgba(255,255,255,0.78);
+    --card-shadow: 0 18px 50px rgba(18,40,20,0.08);
+    --card-shadow-hover: 0 30px 90px rgba(18,40,20,0.12);
+    --radius: 18px;
+    --container:1200px;
+    --glass-border: rgba(255,255,255,0.45);
+    --glow: rgba(111,191,115,0.18);
+    --ani: cubic-bezier(.2,.9,.3,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+  height:100%;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  color:#0b2a16;
+  background:url('images/wallpaper.webp') no-repeat center center fixed;
+  background-size:cover;
+  background-attachment:fixed;
+  background-blend-mode:overlay;
+  background-color:rgba(255,255,255,0.1);
+  -webkit-font-smoothing:antialiased;
+}
+
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%;height:auto;border-radius:12px}
+
+  .container{width:94%;max-width:var(--container);margin:0 auto}
+
+  /* ---------- Header / Nav (glass) ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    backdrop-filter: blur(10px) saturate(110%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.18));
+    border-bottom:1px solid rgba(255,255,255,0.35);
+    box-shadow:0 6px 24px rgba(12,30,12,0.05);
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--leaf-1);font-size:1.15rem}
+  .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--leaf-2),var(--leaf-1));display:inline-grid;place-items:center;color:#fff;font-weight:800;box-shadow:0 8px 26px rgba(30,100,40,0.12)}
+  nav{display:flex;gap:16px;align-items:center}
+  nav a{padding:8px 12px;border-radius:10px;font-weight:600;color:var(--muted);position:relative;transition:all .22s var(--ani)}
+  nav a:hover{color:var(--leaf-1);transform:translateY(-2px)}
+  .menu-btn{display:none;background:none;border:none;font-size:1.25rem;padding:6px 8px;border-radius:8px}
+  @media(max-width:880px){
+    .menu-btn{display:inline-block}
+    nav{display:none;position:absolute;top:66px;left:10px;right:10px;background:var(--glass);padding:12px;border-radius:14px;flex-direction:column;box-shadow:0 18px 50px rgba(0,0,0,0.08)}
+    nav.show{display:flex}
+  }
+
+  /* ---------- floating decorative shapes ---------- */
+  .decor {
+    position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;
+  }
+  .blob {
+    position:absolute;border-radius:50%;filter:blur(34px);opacity:0.16;transform:translate3d(0,0,0);
+  }
+  .blob.b1{width:520px;height:520px;left:-12%;top:-8%;background:radial-gradient(circle at 30% 30%, #a9f0b0, #67c77a);opacity:.12}
+  .blob.b2{width:420px;height:420px;right:-8%;bottom:-6%;background:radial-gradient(circle at 30% 30%, #ffd9b0,#f6c97d);opacity:.10}
+
+  /* ---------- Hero ---------- */
+ .hero{
+  margin-top:72px;
+  min-height:60vh;
+  display:grid;
+  place-items:center;
+  position:relative;
+  padding:60px 0;
+  background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), /* dark overlay for readability */
+    url('/images/wallpaper.webp') center/cover no-repeat; /* 👈 your hero wallpaper */
+  border-bottom-left-radius:40px;
+  border-bottom-right-radius:40px;
+  box-shadow:inset 0 -40px 120px rgba(10,30,10,0.1);
+  color:#fff;
+  text-align:left;
+  z-index:1;
+}
+
+  /* 🌿 Hero Section */
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  width: 100%;
+  max-width: var(--container);
+  padding: 8px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Gradient overlay to improve text contrast */
+.hero-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.hero-left {
+  flex: 1;
+  min-width: 280px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Small top label */
+.eyebrow {
+  display: inline-block;
+  background: rgba(46, 125, 50, 0.15);
+  color: var(--leaf-1);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/* Main heading */
+.hero-left h1 {
+  font-size: 2.6rem;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 12px;
+  font-weight: 800;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Supporting text */
+.hero-left p {
+  color: #f1f1f1;
+  margin-bottom: 18px;
+  max-width: 62ch;
+  font-size: 1rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Buttons */
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--leaf-1), var(--leaf-2));
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 800;
+  border: none;
+  box-shadow: 0 12px 36px rgba(30, 110, 40, 0.14);
+  transition: transform 0.22s var(--ani);
+}
+.btn-primary:hover {
+  transform: translateY(-4px);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Right side boxes */
+.hero-right {
+  width: 420px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Product Cards */
+.sr-card {
+  position: relative;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px) saturate(130%);
+  color: #fff;
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sr-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+.sr-card img {
+  height: 86px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.sr-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sr-card h4,
+.sr-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.sr-card h4 {
+  font-size: 0.95rem;
+  margin-top: 8px;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.sr-card p {
+  font-size: 0.85rem;
+  color: #e9e9e9;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+  .sr-card {
+  position: relative;
+  background: rgba(0, 0, 0, 0.35); /* darker glass effect for contrast */
+  backdrop-filter: blur(8px) saturate(130%);
+  color: #fff;
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sr-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+.sr-card img {
+  height: 86px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.sr-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sr-card h4, .sr-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.sr-card h4 {
+  font-size: 0.95rem;
+  margin-top: 8px;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.sr-card p {
+  font-size: 0.85rem;
+  color: #e9e9e9;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+  /* ---------- Main Products area ---------- */
+  main{position:relative;z-index:2}
+  .products-wrap{padding:48px 0 80px;max-width:var(--container);margin:0 auto}
+  .section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;padding:0 10px}
+  .section-title{display:flex;flex-direction:column}
+  .section-title h2{font-size:1.7rem;color:var(--leaf-1);margin-bottom:6px}
+  .section-title p{color:var(--muted);font-size:0.96rem}
+  .right-actions{display:flex;align-items:center;gap:12px}
+  .filter-pill{padding:8px 12px;border-radius:999px;background:rgba(46,125,50,0.06);color:var(--leaf-1);font-weight:700;border:1px solid rgba(46,125,50,0.04)}
+  .explore-btn{background:transparent;border:2px solid rgba(46,125,50,0.12);padding:10px 16px;border-radius:12px;color:var(--leaf-1);font-weight:800;backdrop-filter: blur(4px)}
+  .explore-btn:hover{background:linear-gradient(135deg, rgba(46,125,50,0.06), rgba(103,199,122,0.04))}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+    padding:0 10px;
+  }
+
+  /* product card — upgraded */
+  .card{
+    position:relative;
+    border-radius:20px;
+    padding:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.76), rgba(255,255,255,0.62));
+    border:1px solid rgba(255,255,255,0.5);
+    box-shadow:var(--card-shadow);
+    overflow:visible;
+    transition:transform .38s var(--ani), box-shadow .38s var(--ani);
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .card::before{
+    content:"";
+    position:absolute;inset:0;border-radius:20px;
+    background:linear-gradient(120deg, rgba(103,199,122,0.02), rgba(246,201,125,0.02));
+    pointer-events:none;
+  }
+  .card:hover{
+    transform:translateY(-12px) rotate(-0.2deg);
+    box-shadow:var(--card-shadow-hover);
+  }
+
+  .card-media{
+    position:relative;border-radius:14px;overflow:hidden;height:220px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ani)}
+  .card:hover .card-media img{transform:scale(1.06)}
+  /* glowing border on hover */
+  .card::after{
+    content:"";position:absolute;left:10px;right:10px;top:10px;height:calc(100% - 20px);border-radius:16px;pointer-events:none;opacity:0;
+    box-shadow:0 0 40px 8px rgba(111,191,115,0.06), inset 0 0 40px rgba(255,255,255,0.02);
+    transition:opacity .28s var(--ani);
+  }
+  .card:hover::after{opacity:1}
+
+  .card-body{padding:6px}
+  .card h3{font-size:1.05rem;color:var(--earth);margin-bottom:6px}
+  .card p{color:var(--muted);font-size:0.95rem;line-height:1.5}
+  .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+  .price{font-weight:800;color:var(--leaf-1)}
+  .buy{background:linear-gradient(135deg,var(--leaf-1),var(--leaf-2));color:#fff;padding:10px 14px;border-radius:12px;border:none;font-weight:800;box-shadow:0 10px 30px rgba(30,110,40,0.12)}
+
+  /* small badges */
+  .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.82);font-weight:700;color:var(--leaf-1);border:1px solid rgba(0,0,0,0.04);font-size:0.83rem}
+
+  /* responsive */
+  @media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}.hero-right{display:none}}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}.hero-left h1{font-size:1.6rem}.hero{padding:28px 0}.hero-left p{max-width:100%}.hero-right{display:none}}
+
+  /* reveal utility */
+  .hidden{opacity:0;transform:translateY(24px)}
+  .reveal{opacity:1;transform:none;transition:all .9s var(--ani);}
+
+  /* footer */
+  footer{padding:34px 0;text-align:center;color:var(--muted);margin-top:60px}
+</style>
 </head>
-<body class="agriculture">
+<body>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="brand">VHPK Agriculture</div>
-    <nav class="nav">
-      <a href="agriculture-home.html">Home</a>
-      <a href="agriculture-products.html">Products</a>
-      <a href="agriculture-gallery.html">Gallery</a>
-      <a href="agriculture-about.html">About Us</a>
-      <a href="agriculture-contact.html">Contact</a>
-    </nav>
+  <!-- decorative blobs -->
+  <div class="decor" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
   </div>
-</header>
 
-<main>
-  <section class="products container reveal-on-scroll">
-    <h2>All Citrus Products</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <img src="../images/agriculture/mosambi.jpg" alt="Mosambi">
-        <h3>Mosambi</h3>
-        <p>Juicy, fresh, naturally sweet.</p>
-        <div class="price-row"><strong>₹60 / kg</strong><button class="btn buy">Buy</button></div>
+  <!-- header -->
+  <header id="header">
+    <div class="header-inner container">
+      <div class="brand"><div class="logo">V</div>VHPK Agriculture</div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+      <nav id="siteNav" aria-label="Main navigation">
+        <a href="agriculture-home.html">Home</a>
+        <a href="agriculture-products.html" class="active">Products</a>
+        <a href="agriculture-gallery.html">Gallery</a>
+        <a href="agriculture-about.html">About</a>
+        <a href="agriculture-contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- hero -->
+  <section class="hero" role="banner" aria-label="Our organic citrus varieties">
+    <div class="hero-inner container">
+      <div class="hero-left">
+        <div class="eyebrow">Farm-fresh • Organic</div>
+        <h1>Premium organic citrus — cultivated in Himachal's hills with sustainable care.</h1>
+        <p>Discover Sweet Lemon and citrus varieties—Jafa, Satgudi, Blood Red, Malta, Balancia and Mosambi—grown on 100 acres using compost, fermented manures and natural pest management.</p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="agriculture-contact.html">Order Wholesale</a>
+          <a class="btn-ghost" href="agriculture-about.html">Learn Our Practices</a>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="../images/agriculture/lemon.jpg" alt="Lemon">
-        <h3>Lemon</h3>
-        <p>Rich in vitamin C, ideal for juices.</p>
-        <div class="price-row"><strong>₹80 / kg</strong><button class="btn buy">Buy</button></div>
-      </div>
-      <div class="product-card">
-        <img src="../images/agriculture/orange.jpg" alt="Orange">
-        <h3>Orange</h3>
-        <p>Freshly harvested oranges, perfect for breakfast.</p>
-        <div class="price-row"><strong>₹70 / kg</strong><button class="btn buy">Buy</button></div>
-      </div>
-      <div class="product-card">
-        <img src="../images/agriculture/grapefruit.jpg" alt="Grapefruit">
-        <h3>Grapefruit</h3>
-        <p>Large and juicy with a tangy taste.</p>
-        <div class="price-row"><strong>₹90 / kg</strong><button class="btn buy">Buy</button></div>
+
+      <div class="hero-right" aria-hidden="true">
+        <div class="sr-card">
+          <img src="https://images.unsplash.com/photo-1592928305727-1d84b6bb0c2b?auto=format&fit=crop&w=800&q=80" alt="Jafa oranges">
+          <h4>Jafa — Aromatic & mild</h4>
+          <p>Thin rind, vitamin rich — excellent for juice and table use.</p>
+        </div>
+        <div class="sr-card">
+          <img src="https://images.unsplash.com/photo-1592928310562-28fa3b6a24f2?auto=format&fit=crop&w=800&q=80" alt="Satgudi">
+          <h4>Satgudi — Sweet & juicy</h4>
+          <p>Low-acid, high sugar — grown in well-drained mid-hill soils.</p>
+        </div>
+        <div class="sr-card">
+          <img src="https://images.unsplash.com/photo-1615484819040-21695f6e5d8d?auto=format&fit=crop&w=800&q=80" alt="Blood Red">
+          <h4>Blood Red — Antioxidant-rich</h4>
+          <p>Deep red flesh, tangy notes — cooler zones amplify color.</p>
+        </div>
+        <div class="sr-card">
+          <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=800&q=80" alt="Malta">
+          <h4>Malta — Aroma & sheen</h4>
+          <p>Semi-sweet, glossy rind — compost-focused organic care.</p>
+        </div>
       </div>
     </div>
   </section>
-</main>
 
-<footer class="site-footer">
-  <div class="container footer-inner">© <span id="year-agri"></span> VHPK Agriculture</div>
-</footer>
+  <!-- products grid -->
+  <main>
+    <section class="products-wrap">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-title">
+            <h2>Sweet Lemon & Citrus Varieties</h2>
+            <p>Hand-cultivated organic citrus from Himachal—diverse varieties with distinct flavor profiles.</p>
+          </div>
+          <div class="right-actions">
+            <div class="filter-pill" id="filterAll">All</div>
+            <div class="filter-pill" id="filterJuice">Best for Juice</div>
+            <a class="explore-btn" href="agriculture-gallery.html">Explore More →</a>
+          </div>
+        </div>
 
-<script src="../js/main.js"></script>
-<script src="../js/agriculture.js"></script>
+        <div class="grid" id="productGrid" role="list">
+          <!-- Card: Jafa -->
+          <article class="card hidden" role="listitem" data-tags="juice,table">
+            <div class="card-media"><img src="https://images.unsplash.com/photo-1615485299671-244fb3c0469d?auto=format&fit=crop&w=1200&q=80" alt="Jafa oranges"></div>
+            <div class="card-body">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3>Jafa (Citrus sinensis)</h3>
+                <span class="badge">Aromatic</span>
+              </div>
+              <p>An aromatic variety known for its mild sweetness and thin rind. Rich in Vitamin C; ideal for fresh juice and table use.</p>
+              <div class="meta">
+                <div class="price">₹60 / kg</div>
+                <button class="buy" onclick="toast('Added Jafa to cart (demo)')">Buy</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: Satgudi -->
+          <article class="card hidden" role="listitem" data-tags="juice">
+            <div class="card-media"><img src="https://images.unsplash.com/photo-1592928310562-28fa3b6a24f2?auto=format&fit=crop&w=1200&q=80" alt="Satgudi"></div>
+            <div class="card-body">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3>Satgudi (Mosambi / Navel)</h3>
+                <span class="badge">Juicy</span>
+              </div>
+              <p>Round, pale-yellow fruits with low acidity and high natural sugar. Thrives in well-drained hills; high juice content.</p>
+              <div class="meta">
+                <div class="price">₹55 / kg</div>
+                <button class="buy" onclick="toast('Added Satgudi to cart (demo)')">Buy</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: Blood Red -->
+          <article class="card hidden" role="listitem" data-tags="special">
+            <div class="card-media"><img src="https://images.unsplash.com/photo-1615484819040-21695f6e5d8d?auto=format&fit=crop&w=1200&q=80" alt="Blood Red"></div>
+            <div class="card-body">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3>Blood Red (Citrus sinensis var. sanguinea)</h3>
+                <span class="badge">Antioxidant</span>
+              </div>
+              <p>Deep red-fleshed specialty citrus. Tangy flavor balance and high antioxidant levels—distinctive and premium.</p>
+              <div class="meta">
+                <div class="price">₹85 / kg</div>
+                <button class="buy" onclick="toast('Added Blood Red to cart (demo)')">Buy</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: Malta -->
+          <article class="card hidden" role="listitem" data-tags="table">
+            <div class="card-media"><img src="https://images.unsplash.com/photo-1601000935390-d2d79dbd6f8d?auto=format&fit=crop&w=1200&q=80" alt="Malta"></div>
+            <div class="card-body">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3>Malta (Citrus sinensis)</h3>
+                <span class="badge">Aromatic</span>
+              </div>
+              <p>Semi-sweet citrus with glossy rind and rich aroma. Grown organically with compost-based manures for quality and aroma.</p>
+              <div class="meta">
+                <div class="price">₹75 / kg</div>
+                <button class="buy" onclick="toast('Added Malta to cart (demo)')">Buy</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: Balancia -->
+          <article class="card hidden" role="listitem" data-tags="hardy">
+            <div class="card-media"><img src="https://images.unsplash.com/photo-1623242100929-c2b5e2cdbf84?auto=format&fit=crop&w=1200&q=80" alt="Balancia"></div>
+            <div class="card-body">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3>Balancia (Citrus aurantium hybrid)</h3>
+                <span class="badge">Hardy</span>
+              </div>
+              <p>Hardy mid-hill variety — slightly tangy and juicy. Chosen for disease resistance and consistent productivity.</p>
+              <div class="meta">
+                <div class="price">₹65 / kg</div>
+                <button class="buy" onclick="toast('Added Balancia to cart (demo)')">Buy</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card: Mosambi -->
+          <article class="card hidden" role="listitem" data-tags="juice,detox">
+            <div class="card-media"><img src="https://images.unsplash.com/photo-1590080875830-b3d7a91d5ad0?auto=format&fit=crop&w=1200&q=80" alt="Mosambi"></div>
+            <div class="card-body">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3>Mosambi (Sweet Lime)</h3>
+                <span class="badge">Popular</span>
+              </div>
+              <p>Medium-sized, yellow-green fruits with tender flesh. Mild sweetness, smooth rind, and valued for detoxifying benefits.</p>
+              <div class="meta">
+                <div class="price">₹60 / kg</div>
+                <button class="buy" onclick="toast('Added Mosambi to cart (demo)')">Buy</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="yr"></span> VHPK Agriculture — Sustainable • Fresh • Trusted</p>
+    </div>
+  </footer>
+
+  <!-- toast container -->
+  <div id="toast" aria-live="polite" style="position:fixed;right:18px;bottom:18px;z-index:9999"></div>
+
+<script>
+  // small utilities: menu toggle
+  const menuBtn=document.getElementById('menuBtn'), siteNav=document.getElementById('siteNav');
+  menuBtn.addEventListener('click',()=>siteNav.classList.toggle('show'));
+
+  // auto year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Intersection reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.remove('hidden'); e.target.classList.add('reveal'); io.unobserve(e.target); }
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.hidden').forEach(el=>io.observe(el));
+
+  // simple toast
+  function toast(msg, ms=2200){
+    const wrap=document.getElementById('toast');
+    const t=document.createElement('div');
+    t.textContent=msg;
+    Object.assign(t.style,{
+      background:'rgba(6,43,17,0.95)',
+      color:'#fff',
+      padding:'10px 14px',
+      borderRadius:'10px',
+      marginTop:'8px',
+      boxShadow:'0 12px 30px rgba(0,0,0,0.25)',
+      fontWeight:700,
+      opacity:0,
+      transform:'translateY(8px)',
+      transition:'opacity .28s, transform .28s'
+    });
+    wrap.appendChild(t);
+    requestAnimationFrame(()=>{ t.style.opacity=1; t.style.transform='translateY(0)'; });
+    setTimeout(()=>{ t.style.opacity=0; t.style.transform='translateY(8px)'; setTimeout(()=>t.remove(),300); }, ms);
+  }
+
+  // filter demo (simple cosmetic filter)
+  const grid=document.getElementById('productGrid');
+  const filterAll=document.getElementById('filterAll');
+  const filterJuice=document.getElementById('filterJuice');
+  filterAll.addEventListener('click', ()=>{ document.querySelectorAll('.card').forEach(c=>c.style.display=''); });
+  filterJuice.addEventListener('click', ()=>{
+    document.querySelectorAll('.card').forEach(c=>{
+      c.style.display = (c.dataset.tags && c.dataset.tags.includes('juice')) ? '' : 'none';
+    });
+  });
+
+  // parallax subtle move for blobs
+  window.addEventListener('scroll', ()=> {
+    const s = window.scrollY;
+    document.querySelectorAll('.blob').forEach((b,i)=>{
+      const speed = i===0 ? 0.12 : -0.06;
+      b.style.transform = `translateY(${s*speed}px)`;
+    });
+  });
+</script>
 </body>
 </html>
