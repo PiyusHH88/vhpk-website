@@ -4,53 +4,135 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VHPK Landing Page</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ---------- Variables & Reset ---------- */
+    :root {
+      --bg: #fbfdf6;
+      --leaf-dark: #2e7d32;
+      --glass: rgba(255,255,255,0.35);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; font-family:'Inter', system-ui, -apple-system,"Segoe UI",Roboto,sans-serif; scroll-behavior:smooth; }
+
+    /* ---------- Background ---------- */
+    body {
+      background: url('/images/landing-banner.png') center/cover no-repeat fixed;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main {
+      flex: 1;
+      padding: 60px 20px 80px; /* bottom padding for footer */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      backdrop-filter: brightness(0.85);
+    }
+
+    h1 { font-size: 3rem; margin-bottom: 20px; font-weight: 800; }
+    p { font-size: 1.2rem; line-height: 1.8; max-width: 700px; }
+
+    /* ---------- Cards Section ---------- */
+    .cards {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 50px;
+      justify-content: center;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 40px 30px;
+      min-width: 250px;
+      max-width: 300px;
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s, box-shadow 0.3s;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    }
+
+    .card h2 {
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+
+    .card p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+
+    .card .cta {
+      font-weight: 700;
+      color: #ffd166;
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 12px 20px;  /* Reduced height */
+      font-weight: 600;
+      color: var(--leaf-dark);
+      background: var(--glass);
+      backdrop-filter: blur(12px) saturate(120%);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      z-index: 100;
+    }
+
+    @media(max-width: 900px) {
+      .cards { flex-direction: column; align-items: center; }
+      h1 { font-size: 2.2rem; }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <div class="brand">VHPK</div>
-      <nav class="nav">
-        <a href="#description">About Us</a>
-        <a href="#sections">Sections</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
 
   <main>
     <!-- Description Section -->
-    <section id="description" class="container reveal-on-scroll">
+    <section id="description">
       <h1>Welcome to VHPK</h1>
       <p>VHPK is a diversified company specializing in railway components and high-quality citrus fruits. We focus on excellence, innovation, and customer satisfaction in all our operations.</p>
     </section>
 
     <!-- Section Cards -->
-    <section id="sections" class="cards container">
+    <section id="sections" class="cards">
       <a href="pages/railway-home.html" class="card card-railway">
-        <div class="card-content">
-          <h2>VHPK Railway</h2>
-          <p>Engineering excellence in railway components.</p>
-          <span class="cta">Explore Railway →</span>
-        </div>
+        <h2>VHPK Railway</h2>
+        <p>Engineering excellence in railway components.</p>
+        <span class="cta">Explore Railway →</span>
       </a>
 
       <a href="pages/agriculture-home.html" class="card card-agri">
-        <div class="card-content">
-          <h2>VHPK Agriculture</h2>
-          <p>Fresh Mosambi & citrus varieties.</p>
-          <span class="cta">Explore Agriculture →</span>
-        </div>
+        <h2>VHPK Agriculture</h2>
+        <p>Fresh Mosambi & citrus varieties.</p>
+        <span class="cta">Explore Agriculture →</span>
       </a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      © <span id="year-landing"></span> VHPK
-    </div>
+    © <span id="year-landing"></span> VHPK
   </footer>
 
-  <script src="js/main.js"></script>
+  <script>
+    // Update footer year dynamically
+    document.getElementById('year-landing').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>

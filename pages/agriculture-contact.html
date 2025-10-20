@@ -1,45 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact VHPK Agriculture</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/agriculture.css">
-</head>
-<body class="agriculture">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VHPK Agriculture — Contact Us</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfdf6;
+  --earth:#6b4c3b;
+  --leaf-dark:#2e7d32;
+  --leaf:#6fbf73;
+  --accent:#f1c27d;
+  --muted:#58615f;
+  --glass:rgba(255,255,255,0.58);
+  --radius:16px;
+  --container:1200px;
+  --transition:.3s;
+  --ani:cubic-bezier(.2,.9,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;font-family:'Inter',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:#213;scroll-behavior:smooth;}
+img{display:block;max-width:100%;border-radius:12px;transition:transform var(--transition);}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;font-family:'Inter',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
 
+/* ---------- Container ---------- */
+.container{width:94%;max-width:var(--container);margin:0 auto;}
+
+/* ---------- Header / Navbar ---------- */
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:200;
+  backdrop-filter: blur(10px) saturate(110%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.18));
+  border-bottom:1px solid rgba(255,255,255,0.35);
+  box-shadow:0 6px 24px rgba(12,30,12,0.05);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 0;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:800;
+  color:var(--leaf-dark);
+  font-size:1.15rem;
+}
+.brand .logo{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--leaf),var(--leaf-dark));
+  display:inline-grid;
+  place-items:center;
+  color:#fff;
+  font-weight:800;
+  box-shadow:0 8px 26px rgba(30,100,40,0.12);
+}
+nav{
+  display:flex;
+  gap:16px;
+  align-items:center;
+}
+nav a{
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:600;
+  color:var(--muted);
+  position:relative;
+  transition:all .22s var(--ani);
+}
+nav a:hover,
+nav a.active{
+  color:var(--leaf-dark);
+  transform:translateY(-2px);
+}
+.menu-btn{
+  display:none;
+  background:none;
+  border:none;
+  font-size:1.25rem;
+  padding:6px 8px;
+  border-radius:8px;
+}
+@media(max-width:880px){
+  .menu-btn{display:inline-block;}
+  nav{
+    display:none;
+    position:absolute;
+    top:66px;
+    left:10px;
+    right:10px;
+    background:var(--glass);
+    padding:12px;
+    border-radius:14px;
+    flex-direction:column;
+    box-shadow:0 18px 50px rgba(0,0,0,0.08);
+  }
+  nav.show{display:flex;}
+  nav a{text-align:center; padding:10px 0;}
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  height:40vh;
+  background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/images/contact-us.png') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:3rem;
+  font-weight:bold;
+  text-align:center;
+  margin-top:72px;
+}
+
+/* ---------- Contact Section ---------- */
+.contact-section {
+  max-width:1200px;
+  margin:50px auto;
+  display:flex;
+  flex-wrap:wrap;
+  gap:50px;
+  padding:0 20px;
+  justify-content:center;
+}
+.contact-info, .contact-form {
+  flex:1 1 400px;
+  background:#fff;
+  padding:40px 30px;
+  border-radius:15px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.1);
+}
+.contact-info h2, .contact-form h2 {margin-bottom:20px; color:var(--leaf-dark);}
+.contact-info p {font-size:1.1rem;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.contact-info p span {font-weight:bold; color:var(--leaf-dark);}
+.contact-form form {display:flex; flex-direction:column; gap:20px;}
+.contact-form input, .contact-form textarea {
+  padding:15px 20px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:1rem;
+  transition:0.3s;
+  width:100%;
+}
+.contact-form input:focus, .contact-form textarea:focus {
+  outline:none;
+  border-color:var(--leaf-dark);
+  box-shadow:0 4px 15px rgba(42,122,42,0.3);
+}
+.contact-form textarea {resize:none; min-height:150px;}
+.contact-form button {
+  padding:15px 20px;
+  border:none;
+  background:var(--leaf-dark);
+  color:#fff;
+  font-size:1.1rem;
+  font-weight:bold;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.contact-form button:hover {background:#ffd166; color:var(--leaf-dark);}
+#successMessage {
+  display:none;
+  margin-top:20px;
+  padding:15px;
+  border-radius:10px;
+  background:#d4edda;
+  color:#155724;
+  font-weight:bold;
+  text-align:center;
+}
+@media(max-width:900px){.contact-section{flex-direction:column; gap:30px;}}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
 <header>
   <div class="header-inner container">
     <div class="brand"><div class="logo">V</div>VHPK Agriculture</div>
-    <button class="menu-btn" id="menuBtn">☰</button>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
     <nav id="siteNav">
       <a href="agriculture-home.html">Home</a>
       <a href="agriculture-products.html">Products</a>
       <a href="agriculture-gallery.html">Gallery</a>
       <a href="agriculture-about.html">About</a>
-      <a href="agriculture-contact.html">Contact</a>
+      <a href="agriculture-contact.html" class="active">Contact</a>
     </nav>
   </div>
 </header>
 
-<main>
-  <section class="contact container reveal-on-scroll">
-    <h2>Contact Us</h2>
-    <form class="contact-form">
+<!-- Hero -->
+<div class="hero">Contact Us</div>
+
+<!-- Contact Section -->
+<section class="contact-section">
+  <div class="contact-info">
+    <h2>Get in Touch</h2>
+    <p><span>Phone:</span> 9315758776</p>
+    <p><span>Email:</span> Vhpk.shayam@gmail.com</p>
+  </div>
+  <div class="contact-form">
+    <h2>Send Us a Message</h2>
+    <form name="contact" netlify id="contactForm">
+      <input type="hidden" name="form-name" value="contact">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
+      <input type="text" name="subject" placeholder="Subject" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
     </form>
-  </section>
-</main>
+    <div id="successMessage">Thank you! Your message has been sent successfully.</div>
+  </div>
+</section>
 
-<footer class="site-footer">
-  <div class="container footer-inner">© <span id="year-agri"></span> VHPK Agriculture</div>
-</footer>
+<script>
+// Navbar mobile toggle
+const menuBtn = document.getElementById('menuBtn'),
+      siteNav = document.getElementById('siteNav');
+menuBtn.addEventListener('click', () => siteNav.classList.toggle('show'));
 
-<script src="../js/main.js"></script>
-<script src="../js/agriculture.js"></script>
+// Contact form submit
+const form = document.getElementById('contactForm'),
+      successMessage = document.getElementById('successMessage');
+form.addEventListener('submit', function(event){
+  event.preventDefault();
+  const data = new FormData(form);
+  fetch("/", {
+    method: "POST",
+    body: new URLSearchParams(data).toString(),
+    headers: {"Content-Type":"application/x-www-form-urlencoded"}
+  })
+  .then(()=>{form.style.display="none";successMessage.style.display="block";})
+  .catch(()=>alert("Oops! Something went wrong."));
+});
+</script>
+
 </body>
 </html>
