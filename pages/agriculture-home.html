@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ---------- Variables & Reset ---------- */
 :root{
   --bg:#fbfdf6;
   --earth:#6b4c3b;
@@ -34,17 +33,21 @@ button{cursor:pointer;font-family:'Inter',system-ui,-apple-system,"Segoe UI",Rob
 /* ---------- Header / Navbar ---------- */
 header{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  backdrop-filter: blur(10px) saturate(110%);
-  background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.18));
-  border-bottom:1px solid rgba(255,255,255,0.35);
-  box-shadow:0 6px 24px rgba(12,30,12,0.05);
+  background:transparent;
+  padding:14px 0;
+  transition: all var(--transition);
 }
-.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--leaf-dark);font-size:1.15rem}
-.brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--leaf),var(--leaf-dark));display:inline-grid;place-items:center;color:#fff;font-weight:800;box-shadow:0 8px 26px rgba(30,100,40,0.12)}
-nav{display:flex;gap:16px;align-items:center}
-nav a{padding:8px 12px;border-radius:10px;font-weight:600;color:var(--muted);position:relative;transition:all .22s var(--ani);}
-nav a:hover, nav a.active{color:var(--leaf-dark);transform:translateY(-2px);}
+header.scrolled{
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px) saturate(110%);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:0 20px;}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;color:#fff;font-size:1.15rem;}
+.brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--leaf),var(--leaf-dark));display:inline-grid;place-items:center;color:#fff;font-weight:800;box-shadow:0 8px 26px rgba(30,100,40,0.12);}
+nav{display:flex;gap:16px;align-items:center;}
+nav a{padding:8px 12px;border-radius:10px;font-weight:600;color:#fff;position:relative;transition:all .22s var(--ani);}
+nav a:hover, nav a.active{transform:translateY(-2px);}
 .menu-btn{display:none;background:none;border:none;font-size:1.25rem;padding:6px 8px;border-radius:8px;}
 @media(max-width:880px){
   .menu-btn{display:inline-block}
@@ -53,9 +56,25 @@ nav a:hover, nav a.active{color:var(--leaf-dark);transform:translateY(-2px);}
 }
 
 /* ---------- Hero ---------- */
-.hero{margin-top:72px;min-height:80vh;display:flex;align-items:center;justify-content:center;position:relative;background:url('/images/Banner.jpg') center/cover no-repeat;border-bottom-left-radius:50px;border-bottom-right-radius:50px;}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(255,255,255,0.02));}
-.hero-inner{position:relative;display:flex;align-items:center;gap:50px;width:100%;max-width:1200px;padding:0 20px;}
+.hero{
+  min-height:80vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  transition:background-image 1s ease-in-out;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 1;
+}
+.hero-inner { position: relative; z-index: 2; display:flex;align-items:center;gap:50px;width:100%;max-width:1200px;padding:0 20px;}
 .hero-left{flex:1;color:#fff;z-index:2;}
 .hero-left h1{font-size:3rem;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 8px rgba(0,0,0,0.3);}
 .hero-left p{font-size:1.2rem;margin-bottom:20px;text-shadow:0 1px 4px rgba(0,0,0,0.3);}
@@ -72,7 +91,7 @@ nav a:hover, nav a.active{color:var(--leaf-dark);transform:translateY(-2px);}
 .feature-tile p{color:var(--muted);font-size:0.95rem;}
 
 /* ---------- About Section ---------- */
-.about{padding:80px 0;background:#f7faf5;}
+.about{padding:80px 0;background:var(--bg);}
 .about-inner{display:flex;gap:50px;align-items:center;flex-wrap:wrap;}
 .about-left{flex:1;min-width:280px;}
 .about-left img{border-radius:var(--radius);box-shadow:0 10px 30px rgba(0,0,0,0.08);}
@@ -99,7 +118,7 @@ nav a:hover, nav a.active{color:var(--leaf-dark);transform:translateY(-2px);}
 .price{font-weight:800;color:var(--leaf-dark);}
 
 /* ---------- Gallery Section ---------- */
-.gallery{padding:60px 0;background:#f7faf5;}
+.gallery{padding:60px 0;background:var(--bg);}
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
 .gallery-grid img{border-radius:16px;height:180px;object-fit:cover;transition:transform var(--transition);}
 .gallery-grid img:hover{transform:scale(1.05);}
@@ -132,7 +151,7 @@ footer p{font-size:0.95rem;}
 </head>
 <body>
 
-<header>
+<header id="header">
   <div class="header-inner container">
     <div class="brand"><div class="logo">V</div>VHPK Agriculture</div>
     <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
@@ -153,8 +172,8 @@ footer p{font-size:0.95rem;}
       <h1>Organic & Sustainable Agriculture</h1>
       <p>We bring fresh, natural, and high-quality produce directly from our farms to your home.</p>
       <div class="cta-row">
-        <button class="btn-primary">Explore Products</button>
-        <button class="btn-ghost">Learn More</button>
+        <button class="btn-primary" onclick="location.href='agriculture-products.html'">Explore Products</button>
+        <button class="btn-ghost" onclick="location.href='agriculture-about.html'">Learn More</button>
       </div>
     </div>
     <div class="hero-right">
@@ -206,7 +225,7 @@ footer p{font-size:0.95rem;}
 <section class="products container" id="products">
   <div class="section-header">
     <h2>Our Products</h2>
-    <a href="#" class="explore-btn">Explore All</a>
+    <a href="agriculture-products.html" class="explore-btn">Explore All</a>
   </div>
   <div class="cards-grid">
     <div class="prod-card">
@@ -218,13 +237,13 @@ footer p{font-size:0.95rem;}
     <div class="prod-card">
       <img src="/images/blood red.webp" alt="blood red ">
       <h3>Blood red</h3>
-      <p>freshly prepared organically in our farm.</p>
+      <p>Freshly prepared organically in our farm.</p>
       <div class="prod-row"><span class="price">₹80/kg</span></div>
     </div>
     <div class="prod-card">
-      <img src="/images/malta.webp" alt="Spinach">
+      <img src="/images/malta.webp" alt="malta">
       <h3>malta</h3>
-      <p>grown with pure organic method.</p>
+      <p>Grown with pure organic method.</p>
       <div class="prod-row"><span class="price">₹60/bunch</span></div>
     </div>
   </div>
@@ -234,7 +253,7 @@ footer p{font-size:0.95rem;}
 <section class="gallery container" id="gallery">
   <div class="section-header">
     <h2>Gallery</h2>
-    <a href="#" class="explore-btn">View More</a>
+    <a href="agriculture-gallery.html" class="explore-btn">View More</a>
   </div>
   <div class="gallery-grid">
     <img src="/images/gallery1.jpg" alt="Gallery 1">
@@ -251,9 +270,39 @@ footer p{font-size:0.95rem;}
 
 <script>
 const menuBtn = document.getElementById('menuBtn'),
-      siteNav = document.getElementById('siteNav');
+      siteNav = document.getElementById('siteNav'),
+      header = document.getElementById('header');
 menuBtn.addEventListener('click', () => siteNav.classList.toggle('show'));
+
+// Hero background slideshow
+const hero = document.querySelector('.hero');
+const images = [
+  "/images/banner2.jpg",
+  "/images/banner3.jpg",
+  "/images/banner4.jpg",
+  "/images/banner5.jpg",
+  "/images/banner6.jpg",
+  "/images/banner7.jpg"
+];
+let current = 0;
+function changeHeroBackground() {
+  current = (current + 1) % images.length;
+  hero.style.backgroundImage = `url('${images[current]}')`;
+}
+hero.style.backgroundImage = `url('${images[0]}')`;
+hero.style.transition = "background-image 1s ease-in-out";
+setInterval(changeHeroBackground, 5000);
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  if(window.scrollY > hero.offsetHeight - 80){
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
 </script>
 
 </body>
 </html>
+
