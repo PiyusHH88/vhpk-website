@@ -117,40 +117,64 @@ window.addEventListener("scroll", () => {
   }
 });
 
+// This function runs as soon as the script loads
+(function() {
+    // Add a class to the body so the CSS knows JS is working
+    document.documentElement.classList.add('js-enabled');
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Navbar Scroll
+    
+    // 1. MOBILE MENU LOGIC
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileToggle && navLinks) {
+        mobileToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            navLinks.classList.toggle('nav-active');
+            
+            // Toggle Icon
+            const icon = mobileToggle.querySelector('i');
+            if (navLinks.classList.contains('nav-active')) {
+                icon.className = 'fas fa-times'; // Switch to X
+                body.style.overflow = 'hidden'; // Prevent background scroll
+            } else {
+                icon.className = 'fas fa-bars'; // Switch to Hamburger
+                body.style.overflow = 'auto';
+            }
+        });
+    }
+
+    // 2. SCROLL REVEAL LOGIC
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const revealOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, revealOptions);
+
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // 3. NAVBAR SCROLL EFFECT
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
+        if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
     });
-
-    // 2. Mobile Menu Fix
-    const mobileToggle = document.querySelector('.mobile-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (mobileToggle && navLinks) {
-        mobileToggle.onclick = () => {
-            navLinks.classList.toggle('nav-active');
-            // Toggle between hamburger and X icon
-            const icon = mobileToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        };
-    }
-
-    // 3. Reveal Animations
-    const revealElements = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    revealElements.forEach(el => observer.observe(el));
 });

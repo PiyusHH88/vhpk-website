@@ -305,39 +305,54 @@ footer {
 }
 
 /*4. ANIMATIONS (Scroll Reveal)*/
-/* Optimized Reveal */
+
+/* 1. Default State: Visible! 
+   This ensures that if JS fails, the user still sees the content. */
 .reveal {
+    opacity: 1;
+    transform: none;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 2. Animation State: Only hide elements if the browser supports IntersectionObserver 
+   and JS is active. We handle this by checking for a 'js-enabled' class we will add via JS. */
+.js-enabled .reveal {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(30px);
 }
 
-/* Force visibility if JS fails or on very small screens */
-.reveal.active {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+.js-enabled .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Safety Net: Show content immediately on mobile to prevent "Blank Screen" */
+/*MOBILE MENU - BULLETPROOF VERSION*/
 @media (max-width: 768px) {
-    .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-    }
-    
-    /* Ensure the mobile menu is hidden by default but ready */
     .nav-links {
-        display: flex;
-        visibility: hidden; 
-        opacity: 0;
-        transform: translateX(100%);
+        position: fixed;
+        top: 80px; /* Match your nav-height */
+        right: -100%; /* Start off-screen */
+        width: 80%;
+        height: calc(100vh - 80px);
+        background: var(--bg-surface);
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+        transition: 0.4s ease-in-out;
+        z-index: 9999;
+        display: flex; /* Always flex, controlled by position */
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
     }
-    
+
     .nav-links.nav-active {
-        visibility: visible;
-        opacity: 1;
-        transform: translateX(0);
+        right: 0; /* Slide in */
+    }
+
+    .mobile-toggle {
+        display: block;
+        z-index: 10001;
+        cursor: pointer;
+        padding: 10px;
     }
 }
 
