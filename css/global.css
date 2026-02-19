@@ -305,17 +305,40 @@ footer {
 }
 
 /*4. ANIMATIONS (Scroll Reveal)*/
+/* Optimized Reveal */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    visibility: hidden; /* Helps prevent ghost elements */
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
+/* Force visibility if JS fails or on very small screens */
 .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Safety Net: Show content immediately on mobile to prevent "Blank Screen" */
+@media (max-width: 768px) {
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+    
+    /* Ensure the mobile menu is hidden by default but ready */
+    .nav-links {
+        display: flex;
+        visibility: hidden; 
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    
+    .nav-links.nav-active {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Delays for staggered animations */
