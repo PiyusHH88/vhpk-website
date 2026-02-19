@@ -306,14 +306,16 @@ footer {
 
 /*4. ANIMATIONS (Scroll Reveal)*/
 .reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    visibility: hidden; /* Helps prevent ghost elements */
 }
 
 .reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
 }
 
 /* Delays for staggered animations */
@@ -471,4 +473,13 @@ footer {
     transform: translateY(0) !important;
     transition: none !important;
   }
+}
+
+.nav-links {
+    z-index: 9999 !important; /* Ensures the menu stays on top */
+}
+
+.mobile-toggle {
+    z-index: 10000 !important; /* Ensures the hamburger icon is clickable */
+    position: relative;
 }
